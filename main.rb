@@ -115,23 +115,32 @@ def main
 
 	hint_lengths = [ 4, 5, 8, 10 ]
 
-	dictionary = DictionaryCheck.new
 
 	words = Array.new
-	#go through the wordSearch left to right, finding words
-	# for i in 0...file_contents.size
-	# 	words += check_left_to_right(file_contents[i], hint_lengths[0])
-	# end
-	# puts file_contents
+	for x in 0...hint_lengths.length
+		#go through the wordSearch left to right, finding words
+		for i in 0...file_contents.size
+			words += check_left_to_right(file_contents[i], hint_lengths[x])
+		end
+		# puts file_contents
 
-	#words += check_top_to_bottom(file_contents, hint_lengths[0])
+		words += check_top_to_bottom(file_contents, hint_lengths[x])
 
+		words += check_top_left_to_bottom_right(file_contents, hint_lengths[x])
+		#puts words
 
-	#words += check_top_left_to_bottom_right(file_contents, hint_lengths[0])
-	#puts words
-
-	words += check_top_right_to_bottom_left(file_contents, hint_lengths[0])
-	#puts words
+		words += check_top_right_to_bottom_left(file_contents, hint_lengths[x])
+		#puts words
+	end
+	dictionary = DictionaryCheck.new
+	for i in 0...words.length
+		if dictionary.is_word(words[i])
+			puts words[i]
+			open('knownWords.txt', 'a') { |f|
+				f.puts words[i]
+			}
+		end
+	end
 end
 
 main
