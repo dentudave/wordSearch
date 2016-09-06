@@ -113,7 +113,7 @@ def main
 	end
 
 
-	hint_lengths = [ 4, 5, 8, 10 ]
+	hint_lengths = [ 4, 5, 6, 8, 10 ]
 
 
 	words = Array.new
